@@ -35,15 +35,13 @@ public class User extends BaseEntity {
 		System.out.println("in ctor of "+getClass().getName());
 	}
 
-	public User(String name, String email, String password, String confirmPassword, Role userRole,
-			ProjectDetails userProject) {
+	public User(String name, String email, String password, String confirmPassword, Role userRole) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.userRole = userRole;
-		this.userProject = userProject;
 	}
 
 	public String getName() {

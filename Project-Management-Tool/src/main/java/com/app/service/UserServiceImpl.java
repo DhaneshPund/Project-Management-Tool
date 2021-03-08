@@ -26,9 +26,10 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public String registerUser(User transientUser) {
+	public User registerUser(User transientUser) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(transientUser);
+		
 	}
 
 }
