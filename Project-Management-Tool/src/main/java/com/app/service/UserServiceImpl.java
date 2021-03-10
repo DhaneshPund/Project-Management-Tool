@@ -28,8 +28,25 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User registerUser(User transientUser) {
 		// TODO Auto-generated method stub
-		return userRepository.save(transientUser);
-		
+	try {
+		return userRepository.save(transientUser);		
+		} catch (Exception e) {
+			throw new UserHandlingException("Duplicate entry on same email");
+		}
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		 userRepository.delete(user);
+	}
+
+
+	@Override
+	public User updateUserPassword(String email, String oldPassword, String newPassword) {
+		User user = userRepository.authenticateUser(email, oldPassword).orElseThrow
+				(()->new UserHandlingException("No such User Exists"));
+				user.setPassword(newPassword);
+		return user;
 	}
 
 }
