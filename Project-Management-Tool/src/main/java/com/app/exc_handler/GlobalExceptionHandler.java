@@ -16,15 +16,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(UserHandlingException.class)
 	public ResponseEntity<?> handleCustomerHandlingException(UserHandlingException e) {
 		System.out.println("in cust hand exc " + e);
-		return new ResponseEntity<>(new ErrorResponse("User Auth Failed .....", e.getMessage()),
+		return new ResponseEntity<>(new ErrorResponse("User Exception .....", e.getMessage()),
 				HttpStatus.UNAUTHORIZED);
 	}
-
-//	@ExceptionHandler(AccountHandlingException.class)
-//	public ResponseEntity<?> handleAccountHandlingException(AccountHandlingException e) {
-//		System.out.println("in acct handling exc " + e);
-//		return new ResponseEntity<>(new ErrorResponse("Fetching a/c summary failed ", e.getMessage()),
-//				HttpStatus.NOT_FOUND);
-//	}
 
 }
