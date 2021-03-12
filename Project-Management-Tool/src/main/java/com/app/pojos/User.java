@@ -1,11 +1,13 @@
 package com.app.pojos;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,11 +27,10 @@ public class User extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_role",length =20)
 	private Role userRole;
-	@ManyToOne
-	@JoinColumn(name = "pid")
-	@JsonIgnoreProperties("users")
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("user")
 	@JsonIgnore
-	private ProjectDetails userProject;
+	private List<ProjectDetails> userProjects;
 	
 	public User() {
 		System.out.println("in ctor of "+getClass().getName());
@@ -66,12 +67,12 @@ public class User extends BaseEntity {
 				+ confirmPassword + ", userRole=" + userRole + "]";
 	}
 
-	public ProjectDetails getUserProject() {
-		return userProject;
+	public List<ProjectDetails> getUserProjects() {
+		return userProjects;
 	}
 
-	public void setUserProject(ProjectDetails userProject) {
-		this.userProject = userProject;
+	public void setUserProjects(List<ProjectDetails> userProjects) {
+		this.userProjects = userProjects;
 	}
 
 	public String getPassword() {
@@ -97,6 +98,14 @@ public class User extends BaseEntity {
 	public void setUserRole(Role userRole) {
 		this.userRole = userRole;
 	}
-	
+	//helper methods
+	public void addProject(ProjectDetails project)
+	{
+		userProjects.add(project);
+	}
+	public void removeProject(ProjectDetails project)
+	{
+		userProjects.remove(project);
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +37,8 @@ public class UserController {
 		if (user == null)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		System.out.println(user);
-		System.out.println(user.getUserProject());
-		ProjectDetails projectDetails = user.getUserProject();
+		System.out.println(user.getUserProjects());
+		List<ProjectDetails> projectDetails = user.getUserProjects();
 		return new ResponseEntity<>(new UserDTO(user, projectDetails), HttpStatus.OK);
 	}
 

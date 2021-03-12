@@ -1,17 +1,19 @@
 package com.app.dto;
 
+import java.util.List;
+
 import com.app.pojos.ProjectDetails;
 import com.app.pojos.User;
 
 public class UserDTO {
 	private User user;
-	private ProjectDetails projectDetails;
+	private List<ProjectDetails> projectDetails;
 
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(User user, ProjectDetails projectDetails) {
+	public UserDTO(User user, List<ProjectDetails> projectDetails) {
 		super();
 		this.user=user;
 		this.projectDetails=projectDetails;
@@ -25,11 +27,11 @@ public class UserDTO {
 		this.user = user;
 	}
 
-	public ProjectDetails getProjectDetails() {
+	public List<ProjectDetails> getProjectDetails() {
 		return projectDetails;
 	}
 
-	public void setProjectDetails(ProjectDetails projectDetails) {
+	public void setProjectDetails(List<ProjectDetails> projectDetails) {
 		this.projectDetails = projectDetails;
 	}
 

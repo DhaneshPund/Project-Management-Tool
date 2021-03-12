@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,7 +26,7 @@ public class ProjectDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pid;
-	@Column(length = 15,name = "p_name")
+	@Column(length = 15,name = "p_name",unique = true,nullable = false)
 	private String projectName;
 	@Column(name="p_description")
 	private String projectDescription;
@@ -34,10 +36,11 @@ public class ProjectDetails {
 	@Column(name="p_end_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate projectEndDate;
-	@OneToMany(mappedBy = "userProject",cascade = CascadeType.ALL,orphanRemoval = true)
-	@JsonIgnoreProperties("userProject")
+	@ManyToOne
+	@JoinColumn(name = "id")
+	@JsonIgnoreProperties("userProjects")
 	@JsonIgnore
-	private List<User> users=new ArrayList<>();
+	private User user;
 	@OneToMany(mappedBy = "storyProject", cascade = CascadeType.ALL,orphanRemoval = true)
 	@JsonIgnore
 	private List<Story> stories = new ArrayList<>();
@@ -46,10 +49,9 @@ public class ProjectDetails {
 		System.out.println("in ctor of"+getClass().getName());
 	}
 
-	public ProjectDetails(int pid, String projectName, String projectDescription, LocalDate projectStartDate,
+	public ProjectDetails(String projectName, String projectDescription, LocalDate projectStartDate,
 			LocalDate projectEndDate) {
 		super();
-		this.pid = pid;
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
 		this.projectStartDate = projectStartDate;
@@ -96,12 +98,12 @@ public class ProjectDetails {
 		this.projectEndDate = projectEndDate;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(User user) {
+		this.user = user;
 	}
 
 	public List<Story> getStories() {
@@ -120,16 +122,6 @@ public class ProjectDetails {
 	}
 	
 	//helper methods
-	public void addUser(User u)
-	{
-		users.add(u);
-		u.setUserProject(this);
-	}
-	public void removeUser(User u)
-	{
-		users.remove(u);
-		u.setUserProject(null);
-	}
 	public void addStory(Story s)
 	{
 		stories.add(s);

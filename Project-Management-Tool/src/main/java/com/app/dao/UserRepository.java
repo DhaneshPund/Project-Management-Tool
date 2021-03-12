@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.app.pojos.User;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-	@Query("select u from User u left outer join fetch u.userProject where u.email= :email and u.password= :password")
+	@Query("select u from User u left outer join fetch u.userProjects where u.email= :email and u.password= :password")
 	Optional<User> authenticateUser(@Param("email") String email, @Param("password") String password);
 
 }
