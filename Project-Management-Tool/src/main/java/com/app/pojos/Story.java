@@ -19,53 +19,66 @@ import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Story {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sid;
+	
 	@Column(name = "s_name",length = 30)
 	private String storyName;
+	
 	@Column(name = "s_description")
 	private String storyDescription;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "s_status")
 	private Status storyStatus;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "s_priority")
 	private Priority storyPriority;
+	
 	@Column(name = "s_points")
 	private int storyPoints;
+	
 	@Column(name = "s_due_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate storyDueDate;
+	
 	@ManyToOne
 	@JoinColumn(name = "pid",nullable = false)
+	@JsonIgnore
 	private ProjectDetails storyProject;
-	@OneToOne
-	@JoinColumn(name = "id")
-	private User storyAssignee;
+	
 	@ElementCollection
 	@CollectionTable(name = "story_subtasks")
 	@Column(name="s_subtasks")
+	@JsonIgnore
 	private List<Subtask> storySubtasks = new ArrayList<>();
+	
 	@ElementCollection
 	@CollectionTable(name = "story_comments")
 	@Column(name = "s_comments")
+	@JsonIgnore
 	private List<Comment> storyComments = new ArrayList<>();
+	
 	@ElementCollection
 	@CollectionTable(name= "story_files")
 	@Column(name = "s_files")
+	@JsonIgnore
 	private List<File> storyFiles = new ArrayList<>();
 	
 	public Story() {
 	System.out.println("in ctor of "+getClass().getName());
 	}
 
-	public Story(int sid, String storyName, String storyDescription, Status storyStatus, Priority storyPriority,
+	public Story(String storyName, String storyDescription, Status storyStatus, Priority storyPriority,
 			int storyPoints, LocalDate storyDueDate) {
 		super();
-		this.sid = sid;
 		this.storyName = storyName;
 		this.storyDescription = storyDescription;
 		this.storyStatus = storyStatus;
@@ -138,14 +151,6 @@ public class Story {
 		this.storyProject = storyProject;
 	}
 
-	public User getStoryAssignee() {
-		return storyAssignee;
-	}
-
-	public void setStoryAssignee(User storyAssignee) {
-		this.storyAssignee = storyAssignee;
-	}
-
 	public List<Subtask> getStorySubtasks() {
 		return storySubtasks;
 	}
@@ -182,7 +187,7 @@ public class Story {
 		{
 			storySubtasks.add(sub);
 		}
-		public void removeUser(Subtask sub)
+		public void removeSubtask(Subtask sub)
 		{
 			storySubtasks.remove(sub);
 		}
