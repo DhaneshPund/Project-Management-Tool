@@ -29,7 +29,7 @@ public class UserController {
 	public UserController() {
 		System.out.println("in ctor of " + getClass().getName() + " " + userService);
 	}
-
+	
 	@GetMapping("login/{email}/{password}")
 	public ResponseEntity<?> authenticateUser(@PathVariable String email, @PathVariable String password) {
 		System.out.println("in get project details " + email + " " + password);
@@ -48,22 +48,12 @@ public class UserController {
 		return ResponseEntity.ok(userService.registerUser(u));
 	}
 
-	@PutMapping("update/{email}/{oldPassword}/{newPassword}")
+	@PutMapping("updatePassword/{email}/{oldPassword}/{newPassword}")
 	public ResponseEntity<?> updateUserPassword(@PathVariable String email, @PathVariable String oldPassword,
 			@PathVariable String newPassword) {
 		User updatedUser = userService.updateUserPassword(email, oldPassword, newPassword);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 
-	@DeleteMapping("delete/{email}/{password}")
-	public ResponseEntity<?> deleteUser(@PathVariable String email, @PathVariable String password) {
-		System.out.println("in delete user " + email + " " + password);
-		User user = userService.authenticateUser(email, password);
-		if (user == null)
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		System.out.println(user);
-		userService.deleteUser(user);
-		return ResponseEntity.ok(HttpStatus.OK);
-	}
-
+	
 }

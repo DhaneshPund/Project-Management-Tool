@@ -1,7 +1,6 @@
 package com.app.dto;
 
 import java.util.List;
-
 import com.app.pojos.ProjectDetails;
 import com.app.pojos.User;
 

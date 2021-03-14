@@ -21,9 +21,8 @@ public class User extends BaseEntity {
 	@Column(unique = true)
 	private String email;
 	@Column(length = 20)
+	@JsonIgnore
 	private String password;
-	@Column(length = 20,name = "confirm_password")
-	private String confirmPassword;
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_role",length =20)
 	private Role userRole;
@@ -36,12 +35,11 @@ public class User extends BaseEntity {
 		System.out.println("in ctor of "+getClass().getName());
 	}
 
-	public User(String name, String email, String password, String confirmPassword, Role userRole) {
+	public User(String name, String email, String password, Role userRole) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.confirmPassword = confirmPassword;
 		this.userRole = userRole;
 	}
 
@@ -64,7 +62,7 @@ public class User extends BaseEntity {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", password=" + password + ", confirmPassword="
-				+ confirmPassword + ", userRole=" + userRole + "]";
+				+ ", userRole=" + userRole + "]";
 	}
 
 	public List<ProjectDetails> getUserProjects() {
@@ -81,14 +79,6 @@ public class User extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
 	}
 
 	public Role getUserRole() {
