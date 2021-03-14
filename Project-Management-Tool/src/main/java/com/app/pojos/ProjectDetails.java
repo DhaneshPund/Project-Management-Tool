@@ -26,6 +26,7 @@ public class ProjectDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pid;
+	
 	@Column(length = 15,name = "p_name",unique = true,nullable = false)
 	private String projectName;
 	@Column(name="p_description")

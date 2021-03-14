@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.app.custom_exceptions.ProjectHandlingException;
+import com.app.custom_exceptions.StoryHandlingException;
 import com.app.custom_exceptions.UserHandlingException;
 import com.app.dto.ErrorResponse;
 
@@ -25,6 +26,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<?> handleProjectHandlingException(ProjectHandlingException e) {
 		System.out.println("in cust hand exc " + e);
 		return new ResponseEntity<>(new ErrorResponse("Project Exception .....", e.getMessage()),
-				HttpStatus.BAD_REQUEST);
+				HttpStatus.NOT_ACCEPTABLE);
+	}
+	@ExceptionHandler(StoryHandlingException.class)
+	public ResponseEntity<?> handleStoryHandlingException(StoryHandlingException e) {
+		System.out.println("in cust hand exc " + e);
+		return new ResponseEntity<>(new ErrorResponse("Story Exception .....", e.getMessage()),
+				HttpStatus.NOT_ACCEPTABLE);
 	}
 }
