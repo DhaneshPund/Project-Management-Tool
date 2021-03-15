@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.UserHandlingException;
 import com.app.dao.UserRepository;
+import com.app.pojos.ProjectDetails;
 import com.app.pojos.Role;
 import com.app.pojos.User;
 
@@ -68,6 +69,9 @@ public class UserServiceImpl implements IUserService {
 		user.setUserRole(u.getUserRole());
 		return user;
 	}
+
+
+	
 
 	
 

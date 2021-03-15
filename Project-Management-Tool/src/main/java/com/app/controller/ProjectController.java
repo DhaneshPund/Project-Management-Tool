@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.pojos.ProjectDetails;
+import com.app.pojos.User;
 import com.app.service.IProjectService;
 
 @RestController
@@ -41,6 +43,12 @@ public class ProjectController {
 		System.out.println("in delete project "+projectName);
 		projectService.deleteProject(projectName);
 		return ResponseEntity.ok(HttpStatus.OK);
+	}
+	
+	@GetMapping("getUserProjects")
+	public ResponseEntity<?> getUserProjects(@RequestBody User user){
+		System.out.println("in get user project for user "+user);
+		return ResponseEntity.ok(projectService.getUserProjects(user));
 	}
 	
 }

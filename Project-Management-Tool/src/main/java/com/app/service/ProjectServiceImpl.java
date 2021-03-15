@@ -1,6 +1,6 @@
 package com.app.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exceptions.ProjectHandlingException;
 import com.app.dao.ProjectRepository;
 import com.app.pojos.ProjectDetails;
+import com.app.pojos.User;
 
 @Service
 @Transactional
@@ -42,6 +43,14 @@ public class ProjectServiceImpl implements IProjectService {
 		project.setProjectStartDate(p.getProjectStartDate());
 		project.setProjectEndDate(p.getProjectEndDate());
 		return project;
+	}
+
+	@Override
+	public List<ProjectDetails> getUserProjects(User user) {
+		// TODO Auto-generated method stub
+		List<ProjectDetails> projectList = projectRepository.findByUser(user)
+				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied id"));
+		return projectList;
 	}
 
 }

@@ -42,6 +42,8 @@ public class UserController {
 		return new ResponseEntity<>(new UserDTO(user, projectDetails), HttpStatus.OK);
 	}
 
+	
+	
 	@PostMapping("register")
 	public ResponseEntity<?> registerUser(@RequestBody User u) {
 		System.out.println("in register user " + u);
