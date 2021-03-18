@@ -51,4 +51,10 @@ public class ProjectController {
 		return ResponseEntity.ok(projectService.getUserProjects(user));
 	}
 	
+	@GetMapping("getAllProjects")
+	public ResponseEntity<?> getAllProjects(){
+		System.out.println("in get all projects");
+		return ResponseEntity.ok(projectService.getAllProjects());
+	}
+	
 }

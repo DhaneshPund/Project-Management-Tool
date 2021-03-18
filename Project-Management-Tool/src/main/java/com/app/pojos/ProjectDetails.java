@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "project_details")
 public class ProjectDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int pid;
+	@Column(length = 5)
+	private String pid;
 	
 	@Column(length = 15,name = "p_name",unique = true,nullable = false)
 	private String projectName;
@@ -50,20 +50,21 @@ public class ProjectDetails {
 		System.out.println("in ctor of"+getClass().getName());
 	}
 
-	public ProjectDetails(String projectName, String projectDescription, LocalDate projectStartDate,
+	public ProjectDetails(String pid,String projectName, String projectDescription, LocalDate projectStartDate,
 			LocalDate projectEndDate) {
 		super();
+		this.pid = pid;
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
 		this.projectStartDate = projectStartDate;
 		this.projectEndDate = projectEndDate;
 	}
 
-	public int getPid() {
+	public String getPid() {
 		return pid;
 	}
 
-	public void setPid(int pid) {
+	public void setPid(String pid) {
 		this.pid = pid;
 	}
 

@@ -34,4 +34,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(new ErrorResponse("Story Exception .....", e.getMessage()),
 				HttpStatus.NOT_ACCEPTABLE);
 	}
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<?> handleRunTimeException(RuntimeException e) {
+		System.out.println("in cust hand exc " + e);
+		return new ResponseEntity<>(new ErrorResponse("Some error occured on server side ....", "UNKNOWN"),
+				HttpStatus.NOT_ACCEPTABLE);
+	}
 }

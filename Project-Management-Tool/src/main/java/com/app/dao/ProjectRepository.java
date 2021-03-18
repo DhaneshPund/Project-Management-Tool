@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.app.pojos.ProjectDetails;
 import com.app.pojos.User;
 
-public interface ProjectRepository extends JpaRepository<ProjectDetails, Integer> {
+public interface ProjectRepository extends JpaRepository<ProjectDetails, String> {
 
 	Optional<ProjectDetails> findByProjectName(String projectName);
 

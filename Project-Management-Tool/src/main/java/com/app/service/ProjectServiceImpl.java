@@ -20,11 +20,11 @@ public class ProjectServiceImpl implements IProjectService {
 
 	@Override
 	public ProjectDetails createNewProject(ProjectDetails project) {
-		try {
+		if (projectRepository.findById(project.getPid()).isPresent())
+			throw new ProjectHandlingException("Duplicate entry for existing project id or name");
+		else
 			return projectRepository.save(project);
-		} catch (Exception e) {
-			throw new ProjectHandlingException("Duplicate entry for existing project name");
-		}
+
 	}
 
 	@Override
@@ -51,6 +51,11 @@ public class ProjectServiceImpl implements IProjectService {
 		List<ProjectDetails> projectList = projectRepository.findByUser(user)
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied id"));
 		return projectList;
+	}
+
+	@Override
+	public List<ProjectDetails> getAllProjects() {
+		return projectRepository.findAll();
 	}
 
 }

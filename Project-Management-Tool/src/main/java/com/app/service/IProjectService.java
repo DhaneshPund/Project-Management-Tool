@@ -10,4 +10,5 @@ public interface IProjectService {
 	void deleteProject(String projectName);
 	ProjectDetails updateProjectDetails(ProjectDetails project);
 	List<ProjectDetails> getUserProjects(User user);
+	List<ProjectDetails> getAllProjects();
 }
