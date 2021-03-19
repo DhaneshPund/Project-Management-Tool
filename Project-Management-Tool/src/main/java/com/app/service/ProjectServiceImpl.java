@@ -28,8 +28,8 @@ public class ProjectServiceImpl implements IProjectService {
 	}
 
 	@Override
-	public void deleteProject(String projectName) {
-		ProjectDetails project = projectRepository.findByProjectName(projectName)
+	public void deleteProject(String pid) {
+		ProjectDetails project = projectRepository.findById(pid)
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied name"));
 		projectRepository.delete(project);
 
@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements IProjectService {
 
 	@Override
 	public ProjectDetails updateProjectDetails(ProjectDetails p) {
-		ProjectDetails project = projectRepository.findByProjectName(p.getProjectName())
+		ProjectDetails project = projectRepository.findById(p.getPid())
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied name"));
 		project.setProjectDescription(p.getProjectDescription());
 		project.setProjectStartDate(p.getProjectStartDate());

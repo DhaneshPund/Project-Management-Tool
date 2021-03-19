@@ -10,7 +10,7 @@ import com.app.pojos.User;
 
 public interface ProjectRepository extends JpaRepository<ProjectDetails, String> {
 
-	Optional<ProjectDetails> findByProjectName(String projectName);
+	//Optional<ProjectDetails> findByProjectName(String projectName);
 
 	Optional<List<ProjectDetails>> findByUser(User user);
 

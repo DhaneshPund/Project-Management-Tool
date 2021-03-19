@@ -38,10 +38,10 @@ public class ProjectController {
 		return ResponseEntity.ok(projectService.updateProjectDetails(projectDetails));
 	}
 	
-	@DeleteMapping("delete/{projectName}")
-	public ResponseEntity<?> deleteProject(@PathVariable String projectName) {
-		System.out.println("in delete project "+projectName);
-		projectService.deleteProject(projectName);
+	@DeleteMapping("delete/{pid}")
+	public ResponseEntity<?> deleteProject(@PathVariable String pid) {
+		System.out.println("in delete project "+pid);
+		projectService.deleteProject(pid);
 		return ResponseEntity.ok(HttpStatus.OK);
 	}
 	
