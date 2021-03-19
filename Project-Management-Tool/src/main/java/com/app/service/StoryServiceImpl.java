@@ -25,8 +25,8 @@ public class StoryServiceImpl implements IStoryService {
 
 
 	@Override
-	public Story addStory(Story story, int projectId) {
-		ProjectDetails project = projectRepository.findById(projectId)
+	public Story addStory(Story story, String uniquePid) {
+		ProjectDetails project = projectRepository.findById(uniquePid)
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied id"));
 		story.setStoryProject(project);
 		return storyRepository.save(story);
@@ -39,9 +39,9 @@ public class StoryServiceImpl implements IStoryService {
 	}
 
 	@Override
-	public List<Story> getStoriesByProjectId(int projectId) {
+	public List<Story> getStoriesByProjectId(String uniquePid) {
 		// TODO Auto-generated method stub
-		ProjectDetails project = projectRepository.findById(projectId)
+		ProjectDetails project = projectRepository.findById(uniquePid)
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied name"));
 		return storyRepository.findStoryByProjectId(project);
 	}

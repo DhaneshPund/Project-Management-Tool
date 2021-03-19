@@ -32,10 +32,10 @@ public class StoryController {
 		System.out.println("in ctor of " + getClass().getName() + " " + storyService);
 	}
 
-	@GetMapping("get/{projectId}")
-	public ResponseEntity<?> getProjectSepcificStories(@PathVariable int projectId) {
-		System.out.println("in get stories by project " + projectId);
-		List<Story> storyList = storyService.getStoriesByProjectId(projectId);
+	@GetMapping("get/{uniquePid}")
+	public ResponseEntity<?> getProjectSepcificStories(@PathVariable String uniquePid) {
+		System.out.println("in get stories by project " + uniquePid);
+		List<Story> storyList = storyService.getStoriesByProjectId(uniquePid);
 		List<StoryDTO> listStoryDTO = new ArrayList<StoryDTO>();
 		for (Story story : storyList) {
 			listStoryDTO.add(new StoryDTO(story, story.getStorySubtasks()));
@@ -44,9 +44,9 @@ public class StoryController {
 	}
 	 
 	@PostMapping("add/{projectId}")
-	public ResponseEntity<?> addStory(@RequestBody Story story, @PathVariable int projectId) {
+	public ResponseEntity<?> addStory(@RequestBody Story story, @PathVariable String uniquePid) {
 		System.out.println("in add story details " + story);
-		Story addedStory = storyService.addStory(story, projectId);
+		Story addedStory = storyService.addStory(story, uniquePid);
 		return new ResponseEntity<>(new StoryDTO(addedStory), HttpStatus.OK);
 	}
 

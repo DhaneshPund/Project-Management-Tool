@@ -11,4 +11,5 @@ public interface IProjectService {
 	ProjectDetails updateProjectDetails(ProjectDetails project);
 	List<ProjectDetails> getUserProjects(User user);
 	List<ProjectDetails> getAllProjects();
+	ProjectDetails getProject(String uniquePid);
 }

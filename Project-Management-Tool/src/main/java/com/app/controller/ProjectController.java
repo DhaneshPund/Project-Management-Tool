@@ -38,11 +38,16 @@ public class ProjectController {
 		return ResponseEntity.ok(projectService.updateProjectDetails(projectDetails));
 	}
 	
-	@DeleteMapping("delete/{pid}")
-	public ResponseEntity<?> deleteProject(@PathVariable String pid) {
-		System.out.println("in delete project "+pid);
-		projectService.deleteProject(pid);
+	@DeleteMapping("/{uniquePid}")
+	public ResponseEntity<?> deleteProject(@PathVariable String uniquePid) {
+		System.out.println("in delete project "+uniquePid);
+		projectService.deleteProject(uniquePid);
 		return ResponseEntity.ok(HttpStatus.OK);
+	}
+	@GetMapping("/{uniquePid}")
+	public ResponseEntity<?> getProjectDetails(@PathVariable String uniquePid) {
+		System.out.println("in get project details "+uniquePid);
+		return ResponseEntity.ok(projectService.getProject(uniquePid));
 	}
 	
 	@GetMapping("getUserProjects")

@@ -20,7 +20,7 @@ public class ProjectServiceImpl implements IProjectService {
 
 	@Override
 	public ProjectDetails createNewProject(ProjectDetails project) {
-		if (projectRepository.findById(project.getPid()).isPresent())
+		if (projectRepository.findById(project.getUniquePid()).isPresent())
 			throw new ProjectHandlingException("Duplicate entry for existing project id or name");
 		else
 			return projectRepository.save(project);
@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements IProjectService {
 
 	@Override
 	public ProjectDetails updateProjectDetails(ProjectDetails p) {
-		ProjectDetails project = projectRepository.findById(p.getPid())
+		ProjectDetails project = projectRepository.findById(p.getUniquePid())
 				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied name"));
 		project.setProjectDescription(p.getProjectDescription());
 		project.setProjectStartDate(p.getProjectStartDate());
@@ -56,6 +56,13 @@ public class ProjectServiceImpl implements IProjectService {
 	@Override
 	public List<ProjectDetails> getAllProjects() {
 		return projectRepository.findAll();
+	}
+
+	@Override
+	public ProjectDetails getProject(String uniquePid) {
+		ProjectDetails project = projectRepository.findById(uniquePid)
+				.orElseThrow(() -> new ProjectHandlingException("No Project exist with supplied name"));
+		return project;
 	}
 
 }

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ProjectDetails {
 	@Id
 	@Column(length = 5)
-	private String pid;
+	private String uniquePid;
 	
 	@Column(length = 15,name = "p_name",unique = true,nullable = false)
 	private String projectName;
@@ -50,22 +50,22 @@ public class ProjectDetails {
 		System.out.println("in ctor of"+getClass().getName());
 	}
 
-	public ProjectDetails(String pid,String projectName, String projectDescription, LocalDate projectStartDate,
+	public ProjectDetails(String uniquePid,String projectName, String projectDescription, LocalDate projectStartDate,
 			LocalDate projectEndDate) {
 		super();
-		this.pid = pid;
+		this.uniquePid =  uniquePid.toUpperCase();
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
 		this.projectStartDate = projectStartDate;
 		this.projectEndDate = projectEndDate;
 	}
 
-	public String getPid() {
-		return pid;
+	public String getUniquePid() {
+		return uniquePid;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setUniquePid(String uniquePid) {
+		this.uniquePid = uniquePid.toUpperCase();
 	}
 
 	public String getProjectName() {
@@ -118,7 +118,7 @@ public class ProjectDetails {
 
 	@Override
 	public String toString() {
-		return "ProjectDetails [pid=" + pid + ", projectName=" + projectName + ", projectDescription="
+		return "ProjectDetails [uniquePid=" + uniquePid + ", projectName=" + projectName + ", projectDescription="
 				+ projectDescription + ", projectStartDate=" + projectStartDate + ", projectEndDate=" + projectEndDate
 				+ "]";
 	}

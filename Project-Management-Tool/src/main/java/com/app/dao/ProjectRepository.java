@@ -13,6 +13,4 @@ public interface ProjectRepository extends JpaRepository<ProjectDetails, String>
 	//Optional<ProjectDetails> findByProjectName(String projectName);
 
 	Optional<List<ProjectDetails>> findByUser(User user);
-
-
 }
