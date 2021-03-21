@@ -10,17 +10,18 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @Entity
 public class Story {
@@ -50,7 +51,7 @@ public class Story {
 	private LocalDate storyDueDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "pid",nullable = false)
+	@JoinColumn(name = "unique_pid",nullable = false)
 	@JsonIgnore
 	private ProjectDetails storyProject;
 	
@@ -66,7 +67,7 @@ public class Story {
 	@JsonIgnore
 	private List<Comment> storyComments = new ArrayList<>();
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name= "story_files")
 	@Column(name = "s_files")
 	@JsonIgnore

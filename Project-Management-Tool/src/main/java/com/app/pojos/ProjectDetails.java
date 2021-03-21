@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "project_details")
 public class ProjectDetails {
 	@Id
-	@Column(length = 5)
+	@Column(length = 5, name = "unique_pid")
 	private String uniquePid;
 	
 	@Column(length = 15,name = "p_name",unique = true,nullable = false)
@@ -61,7 +61,7 @@ public class ProjectDetails {
 	}
 
 	public String getUniquePid() {
-		return uniquePid;
+		return uniquePid.toUpperCase();
 	}
 
 	public void setUniquePid(String uniquePid) {
