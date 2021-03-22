@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @Entity
 @Table(name = "users")
@@ -21,7 +22,6 @@ public class User extends BaseEntity {
 	@Column(unique = true)
 	private String email;
 	@Column(length = 20)
-	@JsonIgnore
 	private String password;
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_role",length =20)
